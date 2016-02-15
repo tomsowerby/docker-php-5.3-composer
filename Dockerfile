@@ -25,7 +25,7 @@ RUN docker-php-ext-install mcrypt zip bz2 mbstring \
   && docker-php-ext-install gd
 
 # Memory Limit
-RUN echo "memory_limit=1024M" > $PHP_INI_DIR/conf.d/memory-limit.ini
+RUN echo "memory_limit=-1" > $PHP_INI_DIR/conf.d/memory-limit.ini
 
 # Time Zone
 RUN echo "date.timezone=${PHP_TIMEZONE:-UTC}" > $PHP_INI_DIR/conf.d/date_timezone.ini
@@ -46,7 +46,7 @@ ENTRYPOINT ["composer", "--ansi"]
 
 # COMPOSER
 
-ENV COMPOSER_VERSION 1.0.0-alpha10
+ENV COMPOSER_VERSION 1.0.0-alpha11
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --version=${COMPOSER_VERSION}
